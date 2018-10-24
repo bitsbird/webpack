@@ -1,2 +1,4 @@
-import style from "./style.css";
-import template from "./index.html";
+require("babel-runtime/regenerator");
+require("webpack-hot-middleware/client?reload=true");
+require("./style.css");
+require("./index.html");

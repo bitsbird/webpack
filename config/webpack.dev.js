@@ -1,4 +1,6 @@
+const webpack = require("webpack");
 const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   //relative paths where webpack is run from (root prj here)
@@ -14,8 +16,12 @@ module.exports = {
   },
   devServer: {
     // see errors in the browser window
+    hot: true,
     overlay: true,
-    contentBase: "dist"
+    contentBase: "dist",
+    stats: {
+      colors: true
+    }
   },
   module: {
     rules: [
@@ -31,15 +37,6 @@ module.exports = {
       {
         test: /\.html$/,
         use: [
-          //how shall I name the file
-          {
-            loader: "file-loader",
-            options: { name: "[name].html" }
-          },
-          //make a separate file, don't include in main bundle
-          {
-            loader: "extract-loader"
-          },
           // lint the file
           {
             loader: "html-loader",
@@ -59,5 +56,11 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new HTMLWebpackPlugin({
+      template: "./src/index.html"
+    })
+  ]
 };
