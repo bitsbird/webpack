@@ -104,6 +104,12 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    alias: {
+      underscore: "lodash",
+      marionette: "backbone.marionette/lib/backbone.marionette.esm.js"
+    }
+  },
   plugins: [
     new HTMLWebpackPlugin({
       template: "./src/index.hbs",
