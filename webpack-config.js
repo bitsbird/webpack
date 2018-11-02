@@ -86,7 +86,13 @@ module.exports = {
         use: [
           { loader: "style-loader" },
           //with sourcemap
-          { loader: "css-loader" },
+          {
+            loader: "css-loader",
+            query: {
+              modules: true,
+              localIdentName: "[name]-[local]--[hash:base64:8]"
+            }
+          },
           { loader: "postcss-loader" },
           { loader: "sass-loader" }
         ]
