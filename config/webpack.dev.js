@@ -1,6 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
 const HTMLWebpackPlugin = require("html-webpack-plugin")
+const {VueLoaderPlugin} = require("vue-loader")
 
 module.exports = {
   entry: {
@@ -23,11 +24,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.vue$/,
         use: [
           {
-            loader: "babel-loader"
+            loader: "vue-loader"
           }
         ]
       },
@@ -62,9 +62,16 @@ module.exports = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       template: "./src/index.html"
     })
-  ]
+  ],
+
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
+    }
+  }
 }
